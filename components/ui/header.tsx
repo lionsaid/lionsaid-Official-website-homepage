@@ -1,15 +1,12 @@
 import Link from "next/link";
 import Logo from "./logo";
 import LanguageSwitcher from "./language-switcher";
-import { getSessionToken } from "@/lib/auth/session";
 import { getI18n } from "@/lib/i18n/server";
 import ThemeSwitcher from "./theme-switcher";
 import { getThemeMode } from "@/lib/theme/server";
 
 export default async function Header() {
   const [{ t, locale }, themeMode] = await Promise.all([getI18n(), getThemeMode()]);
-  const token = await getSessionToken();
-  const isAuthed = Boolean(token);
 
   return (
     <header className="fixed top-3 z-30 w-full md:top-6">
@@ -63,23 +60,6 @@ export default async function Header() {
                 }}
               />
             </div>
-            {isAuthed ? (
-              <>
-                <Link
-                  href="/signout"
-                  className="hidden rounded-full bg-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 dark:bg-white dark:text-black md:inline-flex"
-                >
-                  {t.header.logout}
-                </Link>
-              </>
-            ) : (
-              <Link
-                href="/signin"
-                className="rounded-full bg-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-black"
-              >
-                {t.header.login}
-              </Link>
-            )}
           </div>
         </div>
       </div>

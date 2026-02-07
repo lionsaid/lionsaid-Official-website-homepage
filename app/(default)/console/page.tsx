@@ -1,5 +1,0 @@
-import { redirect } from "next/navigation";
-
-export default async function AdminConsolePage() {
-  redirect("/console/dashboard");
-}

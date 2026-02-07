@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n/server";
+import GlareCard from "@/components/ui/glare-card";
 
 export const metadata: Metadata = {
   title: "Careers at Lionsaid",
@@ -29,7 +30,7 @@ export default async function CareersPage() {
                 {copy.description}
               </p>
             </div>
-            <div className="rounded-[32px] border border-black/10 bg-black p-8 text-white shadow-xl dark:border-white/10">
+            <GlareCard className="bg-black p-8 text-white dark:bg-black">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
                 {copy.cultureTitle}
               </p>
@@ -38,7 +39,7 @@ export default async function CareersPage() {
                   <li key={item}>· {item}</li>
                 ))}
               </ul>
-            </div>
+            </GlareCard>
           </div>
         </div>
       </section>
@@ -51,20 +52,20 @@ export default async function CareersPage() {
             </p>
             <div className="mt-6 space-y-4">
               {copy.roles.map((role) => (
-                <div
+                <GlareCard
                   key={role.title}
-                  className="rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-black/40"
+                  className="bg-white px-5 py-4 dark:bg-black/40"
                 >
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold text-black dark:text-white">{role.title}</p>
                     <span className="text-xs text-black/50 dark:text-white/50">{role.location}</span>
                   </div>
                   <p className="mt-2 text-sm text-black/70 dark:text-white/70">{role.description}</p>
-                </div>
+                </GlareCard>
               ))}
             </div>
           </div>
-          <div className="rounded-[32px] border border-black/10 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-black/40">
+          <GlareCard className="bg-white p-8 dark:bg-black/40">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/50">
               {copy.ctaTitle}
             </p>
@@ -72,7 +73,7 @@ export default async function CareersPage() {
             <div className="mt-6 rounded-2xl border border-black/10 bg-black px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white dark:border-white/10">
               people@lionsaid.com
             </div>
-          </div>
+          </GlareCard>
         </div>
       </section>
     </main>

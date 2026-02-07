@@ -221,28 +221,29 @@ export default function HomeShowcase({
             </div>
           </div>
 
-          <div
-            className={`reveal relative rounded-[32px] border border-black/10 p-10 shadow-xl transition-all duration-500 dark:border-white/10 ${
-              mojiMode === "day"
-                ? "bg-white text-black"
-                : "bg-[#0b0b0b] text-white"
-            }`}
-            data-reveal
-          >
-            <div className="space-y-6">
-              <p className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
-                {copy.mojiEditorLabel}
-              </p>
-              <h3 className="text-3xl font-semibold leading-tight">
-                {copy.mojiEditorTitle}
-              </h3>
-              <p className={`text-lg ${mojiMode === "day" ? "text-black/60" : "text-white/60"}`}>
-                {copy.mojiEditorSubtitle}
-              </p>
-              <div className="rounded-2xl border border-black/10 p-6 text-sm leading-relaxed dark:border-white/10">
-                {copy.mojiEditorBody}
+          <div className="reveal" data-reveal>
+            <GlareCard
+              className={`p-10 transition-all duration-500 ${
+                mojiMode === "day"
+                  ? "bg-white text-black"
+                  : "bg-[#0b0b0b] text-white"
+              }`}
+            >
+              <div className="space-y-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                  {copy.mojiEditorLabel}
+                </p>
+                <h3 className="text-3xl font-semibold leading-tight">
+                  {copy.mojiEditorTitle}
+                </h3>
+                <p className={`text-lg ${mojiMode === "day" ? "text-black/60" : "text-white/60"}`}>
+                  {copy.mojiEditorSubtitle}
+                </p>
+                <div className="rounded-2xl border border-black/10 p-6 text-sm leading-relaxed dark:border-white/10">
+                  {copy.mojiEditorBody}
+                </div>
               </div>
-            </div>
+            </GlareCard>
           </div>
         </div>
       </section>
@@ -267,29 +268,31 @@ export default function HomeShowcase({
           </div>
 
           <div className="relative reveal" data-reveal>
-            <div className="relative h-[360px] overflow-hidden rounded-[32px] border border-black/10 bg-gradient-to-br from-emerald-50 via-white to-emerald-100 p-8 shadow-xl dark:border-white/10 dark:from-emerald-500/10 dark:via-black dark:to-emerald-500/20">
-              <div className="absolute right-8 top-8 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700/70 dark:text-emerald-300/70">
-                {copy.zhiliaoSwipeLabel}
-              </div>
-              <div className="absolute bottom-8 left-8 text-xs text-black/60 dark:text-white/60">
-                {copy.zhiliaoMemoryLabel}
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative h-56 w-80">
-                  <div className="absolute left-0 top-10 h-40 w-64 -rotate-6 rounded-2xl bg-white/90 shadow-xl"></div>
-                  <div className="absolute left-6 top-6 h-44 w-64 -rotate-2 rounded-2xl bg-white/95 shadow-xl"></div>
-                  <div className="absolute left-12 top-2 h-48 w-64 rotate-3 rounded-2xl bg-white shadow-2xl">
-                    <div className="flex h-full flex-col justify-between p-5">
-                      <div className="text-sm font-semibold text-gray-900">{copy.zhiliaoCardTitle}</div>
-                      <div className="text-xs text-gray-500">{copy.zhiliaoCardHint}</div>
+            <GlareCard className="bg-gradient-to-br from-emerald-50 via-white to-emerald-100 p-8 dark:from-emerald-500/10 dark:via-black dark:to-emerald-500/20">
+              <div className="relative h-[360px] overflow-hidden rounded-[20px]">
+                <div className="absolute right-8 top-8 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700/70 dark:text-emerald-300/70">
+                  {copy.zhiliaoSwipeLabel}
+                </div>
+                <div className="absolute bottom-8 left-8 text-xs text-black/60 dark:text-white/60">
+                  {copy.zhiliaoMemoryLabel}
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative h-56 w-80">
+                    <div className="absolute left-0 top-10 h-40 w-64 -rotate-6 rounded-2xl bg-white/90 shadow-xl"></div>
+                    <div className="absolute left-6 top-6 h-44 w-64 -rotate-2 rounded-2xl bg-white/95 shadow-xl"></div>
+                    <div className="absolute left-12 top-2 h-48 w-64 rotate-3 rounded-2xl bg-white shadow-2xl">
+                      <div className="flex h-full flex-col justify-between p-5">
+                        <div className="text-sm font-semibold text-gray-900">{copy.zhiliaoCardTitle}</div>
+                        <div className="text-xs text-gray-500">{copy.zhiliaoCardHint}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div className="absolute bottom-10 right-8 h-20 w-40 rounded-2xl border border-emerald-200/60 bg-white/70 p-4 text-xs text-emerald-700 shadow-sm dark:border-emerald-400/20 dark:bg-black/30 dark:text-emerald-200">
+                  {copy.zhiliaoRetention}
+                </div>
               </div>
-              <div className="absolute bottom-10 right-8 h-20 w-40 rounded-2xl border border-emerald-200/60 bg-white/70 p-4 text-xs text-emerald-700 shadow-sm dark:border-emerald-400/20 dark:bg-black/30 dark:text-emerald-200">
-                {copy.zhiliaoRetention}
-              </div>
-            </div>
+            </GlareCard>
           </div>
         </div>
       </section>
@@ -346,13 +349,15 @@ export default function HomeShowcase({
               {copy.aboutDescription}
             </p>
           </div>
-          <div className="reveal rounded-[32px] border border-black/10 bg-black p-10 text-white shadow-xl dark:border-white/10" data-reveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">{copy.aboutAdvantageLabel}</p>
-            <ul className="mt-6 space-y-4 text-sm text-white/75">
-              {copy.aboutAdvantageItems.map((item) => (
-                <li key={item}>· {item}</li>
-              ))}
-            </ul>
+          <div className="reveal" data-reveal>
+            <GlareCard className="bg-black p-10 text-white dark:bg-black">
+              <p className="text-xs uppercase tracking-[0.3em] text-white/60">{copy.aboutAdvantageLabel}</p>
+              <ul className="mt-6 space-y-4 text-sm text-white/75">
+                {copy.aboutAdvantageItems.map((item) => (
+                  <li key={item}>· {item}</li>
+                ))}
+              </ul>
+            </GlareCard>
           </div>
         </div>
       </section>

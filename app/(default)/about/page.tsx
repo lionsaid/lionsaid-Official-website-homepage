@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n/server";
+import GlareCard from "@/components/ui/glare-card";
 
 export const metadata: Metadata = {
   title: "About Lionsaid",
@@ -30,7 +31,7 @@ export default async function AboutPage() {
                 {copy.description}
               </p>
             </div>
-            <div className="rounded-[32px] border border-black/10 bg-white/90 p-8 shadow-xl dark:border-white/10 dark:bg-white/5">
+            <GlareCard className="bg-white/90 p-8 dark:bg-white/5">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
                 {copy.studioTitle}
               </p>
@@ -45,7 +46,7 @@ export default async function AboutPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </GlareCard>
           </div>
         </div>
       </section>
@@ -65,7 +66,7 @@ export default async function AboutPage() {
               ))}
             </div>
           </div>
-          <div className="rounded-[32px] border border-black/10 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-black/40">
+          <GlareCard className="bg-white p-8 dark:bg-black/40">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/50">
               {copy.timelineTitle}
             </p>
@@ -81,7 +82,7 @@ export default async function AboutPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </GlareCard>
         </div>
       </section>
     </main>
