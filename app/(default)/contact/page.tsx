@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n/server";
+import HoverCard from "@/components/ui/hover-card";
+import Spotlight from "@/components/ui/spotlight";
+import { Button } from "@/components/ui/moving-border";
 
 export const metadata: Metadata = {
   title: "Contact Lionsaid",
@@ -11,7 +14,8 @@ export default async function ContactPage() {
   const copy = t.pages.contact;
 
   return (
-    <main className="bg-white text-black dark:bg-black dark:text-white">
+    <main className="relative overflow-hidden bg-white text-black dark:bg-black dark:text-white">
+      <Spotlight className="opacity-50 dark:opacity-60" />
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-24 left-12 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.08),transparent_60%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(255,255,255,0.06),transparent_60%)]"></div>
@@ -50,20 +54,17 @@ export default async function ContactPage() {
             </p>
             <div className="mt-6 space-y-4">
               {copy.channels.map((channel) => (
-                <div
-                  key={channel.label}
-                  className="rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-black/40"
-                >
+                <HoverCard key={channel.label} className="bg-white/95 px-5 py-4 dark:bg-black/40">
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold text-black dark:text-white">{channel.label}</p>
                     <span className="text-xs text-black/50 dark:text-white/50">{channel.hint}</span>
                   </div>
                   <p className="mt-2 text-sm text-black/70 dark:text-white/70">{channel.value}</p>
-                </div>
+                </HoverCard>
               ))}
             </div>
           </div>
-          <div className="rounded-[32px] border border-black/10 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-black/40">
+          <HoverCard className="rounded-[32px] bg-white p-8 dark:bg-black/40">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/50">
               {copy.formTitle}
             </p>
@@ -76,7 +77,12 @@ export default async function ContactPage() {
                 {copy.title}
               </div>
             </div>
-          </div>
+            <div className="mt-6">
+              <Button className="w-full bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800">
+                hello@lionsaid.com
+              </Button>
+            </div>
+          </HoverCard>
         </div>
       </section>
     </main>

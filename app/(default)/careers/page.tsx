@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n/server";
-import GlareCard from "@/components/ui/glare-card";
+import HoverCard from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/moving-border";
 
 export const metadata: Metadata = {
   title: "Careers at Lionsaid",
@@ -30,7 +31,7 @@ export default async function CareersPage() {
                 {copy.description}
               </p>
             </div>
-            <GlareCard className="bg-black p-8 text-white dark:bg-black">
+            <HoverCard className="bg-black p-8 text-white dark:bg-black">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
                 {copy.cultureTitle}
               </p>
@@ -39,7 +40,7 @@ export default async function CareersPage() {
                   <li key={item}>· {item}</li>
                 ))}
               </ul>
-            </GlareCard>
+            </HoverCard>
           </div>
         </div>
       </section>
@@ -52,28 +53,27 @@ export default async function CareersPage() {
             </p>
             <div className="mt-6 space-y-4">
               {copy.roles.map((role) => (
-                <GlareCard
-                  key={role.title}
-                  className="bg-white px-5 py-4 dark:bg-black/40"
-                >
+                <HoverCard key={role.title} className="bg-white px-5 py-4 dark:bg-black/40">
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold text-black dark:text-white">{role.title}</p>
                     <span className="text-xs text-black/50 dark:text-white/50">{role.location}</span>
                   </div>
                   <p className="mt-2 text-sm text-black/70 dark:text-white/70">{role.description}</p>
-                </GlareCard>
+                </HoverCard>
               ))}
             </div>
           </div>
-          <GlareCard className="bg-white p-8 dark:bg-black/40">
+          <HoverCard className="bg-white p-8 dark:bg-black/40">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/50">
               {copy.ctaTitle}
             </p>
             <p className="mt-4 text-sm text-black/60 dark:text-white/60">{copy.ctaBody}</p>
-            <div className="mt-6 rounded-2xl border border-black/10 bg-black px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white dark:border-white/10">
-              people@lionsaid.com
+            <div className="mt-6">
+              <Button className="w-full bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800">
+                people@lionsaid.com
+              </Button>
             </div>
-          </GlareCard>
+          </HoverCard>
         </div>
       </section>
     </main>

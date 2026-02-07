@@ -46,7 +46,7 @@ export default async function Footer({ border = false }: { border?: boolean }) {
             </p>
             <ul className="space-y-2 text-sm text-black/70 dark:text-white/70">
               <li>
-                <Link className="transition hover:text-black dark:hover:text-white" href="#about">
+                <Link className="transition hover:text-black dark:hover:text-white" href="/about">
                   {isZh ? "关于我们" : "About"}
                 </Link>
               </li>

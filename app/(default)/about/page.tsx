@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n/server";
 import GlareCard from "@/components/ui/glare-card";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 
 export const metadata: Metadata = {
   title: "About Lionsaid",
@@ -10,6 +11,16 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   const { t, locale } = await getI18n();
   const copy = t.pages.about;
+  const getInitials = (name: string) => {
+    const parts = name.split(" ").filter(Boolean);
+    if (parts.length === 0) return name.slice(0, 2);
+    if (parts.length === 1) return parts[0].slice(0, 2);
+    return parts
+      .slice(0, 2)
+      .map((part) => part[0])
+      .join("")
+      .toUpperCase();
+  };
 
   return (
     <main className="bg-white text-black dark:bg-black dark:text-white">
@@ -79,11 +90,11 @@ export default async function AboutPage() {
               </div>
             </div>
           </div>
-          <GlareCard className="bg-white/90 p-6 dark:bg-white/5">
+          <BentoCard className="bg-white/90 p-6 dark:bg-white/5">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
-                Workbench
-              </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+              {locale === "zh" ? "工作台" : "Workbench"}
+            </p>
               <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),rgba(0,0,0,0.12))] p-6 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
                 <div className="grid gap-3">
                   <div className="h-10 w-3/4 rounded-full bg-black/10 dark:bg-white/10" />
@@ -100,42 +111,120 @@ export default async function AboutPage() {
                   : "Replace with a real workbench photo (keyboard, sketches, coffee)."}
               </p>
             </div>
-          </GlareCard>
+          </BentoCard>
         </div>
       </section>
 
       <section className="bg-[#f6f6f6] py-16 dark:bg-[#0b0b0b]">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
+        <div className="mx-auto max-w-6xl space-y-10 px-4 sm:px-6">
+          <div className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
-              {copy.valuesTitle}
+              {copy.officeTitle}
             </p>
-            <div className="mt-6 space-y-6">
-              {copy.values.map((value) => (
-                <div key={value.title} className="border-l border-black/20 pl-4 dark:border-white/20">
-                  <p className="text-lg font-semibold">{value.title}</p>
-                  <p className="mt-2 text-sm text-black/60 dark:text-white/60">{value.description}</p>
-                </div>
-              ))}
-            </div>
+            <p className="text-lg text-black/70 dark:text-white/70">{copy.officeBody}</p>
+            <p className="text-sm text-black/50 dark:text-white/50">{copy.officeNote}</p>
           </div>
-          <GlareCard className="bg-white p-8 dark:bg-black/40">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/50">
-              {copy.timelineTitle}
-            </p>
-            <div className="mt-6 space-y-6">
-              {copy.timeline.map((item) => (
-                <div key={item.year} className="grid gap-2">
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm font-semibold text-black/60 dark:text-white/60">{item.year}</span>
-                    <span className="h-px flex-1 bg-black/10 dark:bg-white/10"></span>
+
+          <BentoGrid>
+            <BentoCard className="lg:col-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                {copy.teamTitle}
+              </p>
+              <p className="mt-4 text-sm text-black/60 dark:text-white/60">{copy.teamBody}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {copy.teamRoles.map((role) => (
+                  <span
+                    key={role}
+                    className="rounded-full border border-black/10 px-4 py-2 text-xs font-semibold text-black/70 dark:border-white/10 dark:text-white/70"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {copy.teamProfiles.map((profile) => (
+                  <div
+                    key={profile.name}
+                    className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-xs text-black/60 dark:border-white/10 dark:bg-black/40 dark:text-white/60"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-black/5 text-xs font-semibold text-black dark:border-white/10 dark:bg-white/10 dark:text-white">
+                        {getInitials(profile.name)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-black dark:text-white">{profile.name}</p>
+                        <p className="text-xs text-black/50 dark:text-white/50">{profile.role}</p>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs text-black/60 dark:text-white/60">{profile.focus}</p>
                   </div>
-                  <p className="text-base font-semibold text-black dark:text-white">{item.title}</p>
-                  <p className="text-sm text-black/60 dark:text-white/60">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </GlareCard>
+                ))}
+              </div>
+            </BentoCard>
+
+            <BentoCard>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                {copy.teamSnapshotTitle}
+              </p>
+              <div className="mt-4 grid gap-3">
+                {copy.teamStats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex items-center justify-between rounded-2xl border border-black/10 bg-white px-4 py-3 text-xs text-black/60 dark:border-white/10 dark:bg-black/40 dark:text-white/60"
+                  >
+                    <span>{stat.label}</span>
+                    <span>{stat.value}</span>
+                  </div>
+                ))}
+              </div>
+            </BentoCard>
+
+            <BentoCard className="lg:col-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                {copy.valuesTitle}
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                {copy.values.map((value) => (
+                  <div key={value.title} className="rounded-2xl border border-black/10 bg-white px-4 py-4 dark:border-white/10 dark:bg-black/40">
+                    <p className="text-sm font-semibold text-black dark:text-white">{value.title}</p>
+                    <p className="mt-2 text-xs text-black/60 dark:text-white/60">{value.description}</p>
+                  </div>
+                ))}
+              </div>
+            </BentoCard>
+
+            <BentoCard>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                {copy.timelineTitle}
+              </p>
+              <div className="mt-6 space-y-5">
+                {copy.timeline.map((item) => (
+                  <div key={item.year} className="grid gap-2">
+                    <div className="flex items-center gap-3 text-xs font-semibold text-black/50 dark:text-white/50">
+                      <span>{item.year}</span>
+                      <span className="h-px flex-1 bg-black/10 dark:bg-white/10"></span>
+                    </div>
+                    <p className="text-sm font-semibold text-black dark:text-white">{item.title}</p>
+                    <p className="text-xs text-black/60 dark:text-white/60">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </BentoCard>
+
+            <BentoCard className="lg:col-span-3">
+              <div className="grid gap-4 sm:grid-cols-3">
+                {copy.officeGalleryLabels.map((label, index) => (
+                  <div key={label} className="space-y-3">
+                    <div
+                      className="aspect-[4/3] rounded-2xl border border-black/10 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),rgba(0,0,0,0.16))] dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0.02))]"
+                      style={{ filter: `saturate(${110 + index * 5}%)` }}
+                    />
+                    <p className="text-xs text-black/50 dark:text-white/50">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </BentoCard>
+          </BentoGrid>
         </div>
       </section>
     </main>

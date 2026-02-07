@@ -8,7 +8,6 @@ type Messages = {
     navProducts: string;
     navEngineering: string;
     navAbout: string;
-    appStore: string;
   };
   home: {
     badge: string;
@@ -49,20 +48,33 @@ type Messages = {
     aboutDescription: string;
     aboutAdvantageLabel: string;
     aboutAdvantageItems: string[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
   };
-    pages: {
-      about: {
-        eyebrow: string;
-        title: string;
-        description: string;
-        craftsTitle: string;
-        craftsHeadline: string;
-        craftsBody: string;
-        craftsToolsLabel: string;
-        craftsTools: string[];
-        studioTitle: string;
-        studioBody: string;
-        valuesTitle: string;
+  pages: {
+    about: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      craftsTitle: string;
+      craftsHeadline: string;
+      craftsBody: string;
+      craftsToolsLabel: string;
+      craftsTools: string[];
+      officeTitle: string;
+      officeBody: string;
+      officeNote: string;
+      officeGalleryLabels: string[];
+      teamTitle: string;
+      teamBody: string;
+      teamRoles: string[];
+      teamSnapshotTitle: string;
+      teamStats: Array<{ label: string; value: string }>;
+      teamProfiles: Array<{ name: string; role: string; focus: string }>;
+      studioTitle: string;
+      studioBody: string;
+      valuesTitle: string;
       values: Array<{ title: string; description: string }>;
       timelineTitle: string;
       timeline: Array<{ year: string; title: string; description: string }>;
@@ -110,7 +122,6 @@ export const messages: Record<Locale, Messages> = {
       navProducts: "Products",
       navEngineering: "Engineering",
       navAbout: "About",
-      appStore: "App Store",
     },
     home: {
       badge: "Digital Crafts · Record & Internalize",
@@ -176,6 +187,9 @@ export const messages: Record<Locale, Messages> = {
         "Algorithm-driven learning and memory modeling",
         "Minimal interfaces + high-performance architecture",
       ],
+      ctaTitle: "Build tools that feel inevitable.",
+      ctaBody: "We partner with teams that value precision, restraint, and long-term craft. Let’s make the next calm, powerful tool together.",
+      ctaButton: "Start a project",
     },
     pages: {
       about: {
@@ -186,12 +200,32 @@ export const messages: Record<Locale, Messages> = {
         craftsTitle: "The Digital Craftsmen",
         craftsHeadline: "Code is our brush, the screen is our canvas.",
         craftsBody:
-          "We are Lionsaid, an independent studio of developers and designers. In an age of noise, we build quiet tools. From every Moji stroke to every Zhiliao recall, we craft software that stays warm and lasting. We don’t chase explosive DAU; we care about elegant code and precise pixels. Good software should feel like a trusted tool—better every day.",
+          "We are Lionsaid, an independent studio of developers and designers. In an age of noise, we build quiet tools. From every Moji stroke to every Zhiliao recall, we craft software meant to last with warmth. We don’t chase explosive DAU; we care about elegant code and precise pixels. Great software should feel like a trusted tool—better every day.",
         craftsToolsLabel: "Toolbox",
-        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js", "Spring"],
-        studioTitle: "Two products, one loop",
-        studioBody:
-          "Moji captures the fleeting. Zhiliao Cards turns recall into ownership. Together they form a closed loop that makes learning tangible.",
+        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js"],
+      officeTitle: "Studio & Office",
+      officeBody:
+        "A small workspace with big focus. We keep our environment simple—keyboards, sketches, and the calm that helps us ship with care.",
+      officeNote: "Replace the placeholders with real studio photos.",
+      officeGalleryLabels: ["Workbench / keyboard", "Sketch wall / sync", "Library / quiet corner"],
+      teamTitle: "The Team",
+      teamBody:
+        "We’re a 2–10 person studio. Designers and engineers work side-by-side, reviewing every pixel and every line of code.",
+      teamRoles: ["Product design", "iOS / Android", "Frontend", "Backend", "Research & writing"],
+      teamSnapshotTitle: "Team snapshot",
+      teamStats: [
+        { label: "Size", value: "2–10" },
+        { label: "Collaboration", value: "Design + engineering" },
+        { label: "Cadence", value: "Weekly reviews" },
+      ],
+      teamProfiles: [
+        { name: "Craft Lead", role: "Product direction", focus: "Typography and interaction" },
+        { name: "Design Engineer", role: "Frontend + motion", focus: "Swiss grid & precision" },
+        { name: "Systems Builder", role: "Backend + data", focus: "PostgreSQL and API craft" },
+      ],
+      studioTitle: "Two products, one loop",
+      studioBody:
+        "Moji captures the fleeting. Zhiliao Cards turns recall into ownership. Together they form a closed loop that makes learning tangible.",
         valuesTitle: "What we believe",
         values: [
           { title: "Quiet UX", description: "Interfaces that disappear when focus matters most." },
@@ -272,7 +306,6 @@ export const messages: Record<Locale, Messages> = {
       navProducts: "产品",
       navEngineering: "工程",
       navAbout: "关于",
-      appStore: "App Store",
     },
     home: {
       badge: "数字工匠 · Record & Internalize",
@@ -338,6 +371,9 @@ export const messages: Record<Locale, Messages> = {
         "算法驱动的学习与记忆建模",
         "极简界面 + 高性能架构",
       ],
+      ctaTitle: "打造一款“必然好用”的工具。",
+      ctaBody: "如果你同样重视克制设计与工程细节，我们愿意成为你长期的产品伙伴。",
+      ctaButton: "发起合作",
     },
     pages: {
       about: {
@@ -350,10 +386,30 @@ export const messages: Record<Locale, Messages> = {
         craftsBody:
           "我们是 Lionsaid 狮语，一个由开发者和设计师组成的独立工作室。在信息爆炸的时代，我们拒绝制造噪音。我们相信工具应该是安静的、克制的。从“墨迹”的每一次落笔，到“知了卡片”的每一次记忆唤醒，我们致力于构建“长久且有温度”的软件。我们不追求日活的爆发式增长，更在意每一行代码的优雅与每一个像素的精准。好的软件应该像一把趁手的老工具，越用越顺手。",
         craftsToolsLabel: "武器库",
-        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js", "Spring"],
-        studioTitle: "两款产品，一个闭环",
-        studioBody:
-          "墨迹捕捉稍纵即逝的灵感，知了卡片把记忆变成能力。输入与输出形成闭环，让学习更可感。",
+        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js"],
+      officeTitle: "工作室与办公室",
+      officeBody:
+        "小而专注的工作空间，让我们把注意力放在打磨与交付上。键盘、草图、咖啡，以及一份安静。",
+      officeNote: "请用真实办公室照片替换占位图。",
+      officeGalleryLabels: ["工作台 / 机械键盘", "草图白板 / 协作区", "资料柜 / 安静角落"],
+      teamTitle: "团队",
+      teamBody:
+        "我们是 2-10 人的精英小队，设计与工程并肩协作，每一个像素与每一行代码都会被认真讨论。",
+      teamRoles: ["产品设计", "iOS / Android", "前端", "后端", "研究与写作"],
+      teamSnapshotTitle: "团队画像",
+      teamStats: [
+        { label: "规模", value: "2–10" },
+        { label: "协作方式", value: "设计 + 工程并行" },
+        { label: "节奏", value: "每周评审" },
+      ],
+      teamProfiles: [
+        { name: "工艺主理人", role: "产品方向", focus: "字体与交互" },
+        { name: "设计工程师", role: "前端 + 动效", focus: "瑞士网格与细节" },
+        { name: "系统工程师", role: "后端 + 数据", focus: "PostgreSQL 与 API" },
+      ],
+      studioTitle: "两款产品，一个闭环",
+      studioBody:
+        "墨迹捕捉稍纵即逝的灵感，知了卡片把记忆变成能力。输入与输出形成闭环，让学习更可感。",
         valuesTitle: "我们的信念",
         values: [
           { title: "安静的体验", description: "界面在需要专注时隐去存在感。" },

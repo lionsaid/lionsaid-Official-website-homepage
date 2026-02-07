@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import GlareCard from "@/components/ui/glare-card";
-
-const CODE_FLOATERS = ["{ }", "</>", "SELECT *", "const", "useMemo()", "@media", "grid", "API", "JSON"];
+import BackgroundBeams from "@/components/ui/background-beams";
+import HoverCard from "@/components/ui/hover-card";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
+import Spotlight from "@/components/ui/spotlight";
+import { Button } from "@/components/ui/moving-border";
 
 type HomeCopy = {
   badge: string;
@@ -45,6 +48,9 @@ type HomeCopy = {
   aboutDescription: string;
   aboutAdvantageLabel: string;
   aboutAdvantageItems: string[];
+  ctaTitle: string;
+  ctaBody: string;
+  ctaButton: string;
 };
 
 export default function HomeShowcase({
@@ -68,99 +74,50 @@ export default function HomeShowcase({
     return () => window.removeEventListener("mousemove", handler);
   }, []);
 
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const floaters = useMemo(
-    () =>
-      CODE_FLOATERS.map((text, index) => ({
-        id: `${text}-${index}`,
-        text,
-        style: {
-          left: `${8 + index * 10}%`,
-          top: `${10 + ((index * 13) % 60)}%`,
-          animationDelay: `${index * 0.6}s`,
-        },
-      })),
-    []
-  );
-
   return (
     <div
       className={`relative overflow-hidden bg-white text-gray-900 dark:bg-black dark:text-white ${className}`}
     >
       <div className="pointer-events-none absolute inset-0">
+        <BackgroundBeams className="opacity-50 dark:opacity-60" />
         <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.25),transparent_60%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(59,130,246,0.2),transparent_60%)]"></div>
         <div className="absolute right-[-10%] top-40 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.08),transparent_60%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_60%)]"></div>
         <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,rgba(0,0,0,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.15)_1px,transparent_1px)] [background-size:96px_96px] dark:opacity-[0.12]"></div>
       </div>
 
       <section className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col gap-10 px-4 pb-24 pt-24 sm:min-h-[80vh] sm:px-6 lg:pt-32">
-        <div className="absolute inset-0 -z-10">
-          {floaters.map((item) => (
-            <span
-              key={item.id}
-              className="absolute text-xs font-medium text-black/30 animate-[float_8s_ease-in-out_infinite] dark:text-white/25"
-              style={item.style}
-            >
-              {item.text}
-            </span>
-          ))}
-        </div>
-
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-8">
             <p className="inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-black/70 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70">
               {copy.badge}
             </p>
-            <h1 className="reveal text-5xl font-semibold uppercase tracking-[-0.02em] text-black sm:text-6xl md:text-7xl dark:text-white" data-reveal>
+            <h1 className="text-5xl font-semibold uppercase tracking-[-0.02em] text-black sm:text-6xl md:text-7xl dark:text-white">
               {copy.titleLine1}
               <br />
               {copy.titleLine2}
             </h1>
-            <p className="reveal max-w-xl text-lg text-black/70 dark:text-white/70" data-reveal>
+            <p className="max-w-xl text-lg text-black/70 dark:text-white/70">
               {copy.description}
             </p>
-            <div className="reveal flex flex-wrap items-center gap-4" data-reveal>
-              <a
-                href="#products"
-                className="group inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:shadow-black/30 dark:bg-white dark:text-black"
-              >
-                {copy.ctaPrimary}
-                <span className="text-base">↘</span>
-              </a>
-              <a
-                href="#engineering"
-                className="inline-flex items-center gap-2 rounded-full border border-black/15 px-6 py-3 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-black/5 dark:border-white/15 dark:text-white dark:hover:bg-white/10"
-              >
+            <div className="flex flex-wrap items-center gap-4">
+              <Button className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 px-6 py-3 text-sm" onClick={() => {
+                const el = document.getElementById("products");
+                el?.scrollIntoView({ behavior: "smooth" });
+              }}>
+                {copy.ctaPrimary} <span className="text-base">↘</span>
+              </Button>
+              <Button className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 px-6 py-3 text-sm" onClick={() => {
+                const el = document.getElementById("engineering");
+                el?.scrollIntoView({ behavior: "smooth" });
+              }}>
                 {copy.ctaSecondary}
-              </a>
+              </Button>
             </div>
           </div>
 
-          <div
-            className="relative flex items-center justify-center"
-          >
+          <div className="relative flex items-center justify-center">
             <div
-              className="reveal relative flex flex-col items-center justify-center gap-6 sm:flex-row"
-              data-reveal
+              className="relative flex flex-col items-center justify-center gap-6 sm:flex-row"
               style={{
                 transform: `perspective(900px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
                 transition: "transform 0.2s ease-out",
@@ -189,15 +146,15 @@ export default function HomeShowcase({
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
               {copy.mojiLabel}
             </p>
-            <h2 className="reveal text-4xl font-semibold text-black dark:text-white" data-reveal>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">
               {copy.mojiTitleLine1}
               <br />
               {copy.mojiTitleLine2}
             </h2>
-            <p className="reveal text-lg text-black/65 dark:text-white/60" data-reveal>
+            <p className="text-lg text-black/65 dark:text-white/60">
               {copy.mojiDescription}
             </p>
-            <div className="reveal inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black/70 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70" data-reveal>
+            <div className="inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black/70 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white/70">
               <span>{copy.mojiSwitchLabel}</span>
               <button
                 className={`rounded-full px-3 py-1 text-[11px] font-semibold transition ${
@@ -222,7 +179,7 @@ export default function HomeShowcase({
             </div>
           </div>
 
-          <div className="reveal" data-reveal>
+          <div>
             <GlareCard
               className={`p-10 transition-all duration-500 ${
                 mojiMode === "day"
@@ -255,20 +212,20 @@ export default function HomeShowcase({
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
               {copy.zhiliaoLabel}
             </p>
-            <h2 className="reveal text-4xl font-semibold text-black dark:text-white" data-reveal>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">
               {copy.zhiliaoTitleLine1}
               <br />
               {copy.zhiliaoTitleLine2}
             </h2>
-            <p className="reveal text-lg text-black/65 dark:text-white/60" data-reveal>
+            <p className="text-lg text-black/65 dark:text-white/60">
               {copy.zhiliaoDescription}
             </p>
-            <div className="reveal inline-flex items-center gap-2 rounded-2xl border border-black/10 bg-black px-4 py-2 text-xs text-white shadow-lg dark:border-white/10 dark:bg-white dark:text-black font-[var(--font-plex-mono)]" data-reveal>
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-black/10 bg-black px-4 py-2 text-xs text-white shadow-lg dark:border-white/10 dark:bg-white dark:text-black font-[var(--font-plex-mono)]">
               {copy.zhiliaoPoweredBy}
             </div>
           </div>
 
-          <div className="relative reveal" data-reveal>
+          <div className="relative">
             <GlareCard className="bg-gradient-to-br from-emerald-50 via-white to-emerald-100 p-8 dark:from-emerald-500/10 dark:via-black dark:to-emerald-500/20">
               <div className="relative h-[360px] overflow-hidden rounded-[20px]">
                 <div className="absolute right-8 top-8 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700/70 dark:text-emerald-300/70">
@@ -304,23 +261,18 @@ export default function HomeShowcase({
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
               {copy.engineeringLabel}
             </p>
-            <h2 className="reveal text-4xl font-semibold text-black dark:text-white" data-reveal>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">
               {copy.engineeringTitle}
             </h2>
-            <p className="reveal text-lg text-black/65 dark:text-white/60" data-reveal>
+            <p className="text-lg text-black/65 dark:text-white/60">
               {copy.engineeringDescription}
             </p>
           </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {copy.blogPosts.map((post, index) => (
-              <div
-                key={post.title}
-                className="reveal"
-                data-reveal
-                style={{ transitionDelay: `${index * 120}ms` }}
-              >
-                <Link href={`/news/${post.slug}`} className="block">
-                  <GlareCard className="bg-white/90 dark:bg-white/5">
+          <BentoGrid>
+            {copy.blogPosts.map((post) => (
+              <Link key={post.title} href={`/news/${post.slug}`} className="block">
+                <HoverCard>
+                  <BentoCard className="border-none bg-transparent p-0 shadow-none">
                     <p className="text-xs uppercase tracking-[0.3em] text-black/40 dark:text-white/40">
                       Engineering
                     </p>
@@ -329,11 +281,11 @@ export default function HomeShowcase({
                     <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
                       {copy.engineeringReadMore} <span>→</span>
                     </div>
-                  </GlareCard>
-                </Link>
-              </div>
+                  </BentoCard>
+                </HoverCard>
+              </Link>
             ))}
-          </div>
+          </BentoGrid>
         </div>
       </section>
 
@@ -343,16 +295,16 @@ export default function HomeShowcase({
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
               {copy.aboutLabel}
             </p>
-            <h2 className="reveal text-4xl font-semibold text-black dark:text-white" data-reveal>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">
               {copy.aboutTitleLine1}
               <br />
               {copy.aboutTitleLine2}
             </h2>
-            <p className="reveal text-lg text-black/65 dark:text-white/60" data-reveal>
+            <p className="text-lg text-black/65 dark:text-white/60">
               {copy.aboutDescription}
             </p>
           </div>
-          <div className="reveal" data-reveal>
+          <div>
             <GlareCard className="bg-black p-10 text-white dark:bg-black">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">{copy.aboutAdvantageLabel}</p>
               <ul className="mt-6 space-y-4 text-sm text-white/75">
@@ -365,39 +317,24 @@ export default function HomeShowcase({
         </div>
       </section>
 
-      <style jsx global>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-          100% {
-            transform: translateY(0px);
-          }
-        }
+      <section className="relative overflow-hidden bg-white py-24 dark:bg-black">
+        <Spotlight />
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="space-y-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
+              Studio
+            </p>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">{copy.ctaTitle}</h2>
+            <p className="max-w-xl text-lg text-black/65 dark:text-white/60">{copy.ctaBody}</p>
+          </div>
+          <div className="flex items-center justify-start lg:justify-end">
+            <Button className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 px-6 py-3 text-sm">
+              {copy.ctaButton}
+            </Button>
+          </div>
+        </div>
+      </section>
 
-        .reveal {
-          opacity: 0;
-          transform: translateY(18px);
-          transition: opacity 600ms ease, transform 600ms ease;
-          will-change: opacity, transform;
-        }
-
-        .reveal.is-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .reveal {
-            opacity: 1;
-            transform: none;
-            transition: none;
-          }
-        }
-      `}</style>
     </div>
   );
 }
