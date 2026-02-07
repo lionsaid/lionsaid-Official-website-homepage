@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Logo from "./logo";
 import LanguageSwitcher from "./language-switcher";
 import { getI18n } from "@/lib/i18n/server";
 import ThemeSwitcher from "./theme-switcher";

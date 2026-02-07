@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const { t } = await getI18n();
+  const { t, locale } = await getI18n();
   const copy = t.pages.about;
 
   return (
@@ -48,6 +48,59 @@ export default async function AboutPage() {
               </div>
             </GlareCard>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-12 dark:bg-black">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="space-y-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-black/50 dark:text-white/40">
+              {copy.craftsTitle}
+            </p>
+            <h2 className="text-4xl font-semibold text-black dark:text-white">
+              {copy.craftsHeadline}
+            </h2>
+            <p className="text-lg text-black/70 dark:text-white/70">
+              {copy.craftsBody}
+            </p>
+            <div className="pt-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                {copy.craftsToolsLabel}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {copy.craftsTools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="rounded-full border border-black/10 px-4 py-2 text-xs font-semibold text-black/70 dark:border-white/10 dark:text-white/70"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+          <GlareCard className="bg-white/90 p-6 dark:bg-white/5">
+            <div className="space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+                Workbench
+              </p>
+              <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),rgba(0,0,0,0.12))] p-6 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
+                <div className="grid gap-3">
+                  <div className="h-10 w-3/4 rounded-full bg-black/10 dark:bg-white/10" />
+                  <div className="h-10 w-2/3 rounded-full bg-black/10 dark:bg-white/10" />
+                  <div className="h-10 w-1/2 rounded-full bg-black/10 dark:bg-white/10" />
+                </div>
+                <div className="mt-6 text-xs text-black/50 dark:text-white/50">
+                  {copy.craftsHeadline}
+                </div>
+              </div>
+              <p className="text-sm text-black/60 dark:text-white/60">
+                {locale === "zh"
+                  ? "建议替换为真实工作台照片（机械键盘、草图白板、咖啡杯）。"
+                  : "Replace with a real workbench photo (keyboard, sketches, coffee)."}
+              </p>
+            </div>
+          </GlareCard>
         </div>
       </section>
 

@@ -28,12 +28,12 @@ export default async function Footer({ border = false }: { border?: boolean }) {
             </p>
             <ul className="space-y-2 text-sm text-black/70 dark:text-white/70">
               <li>
-                <Link className="transition hover:text-black dark:hover:text-white" href="#products">
+                <Link className="transition hover:text-black dark:hover:text-white" href="/products/moji">
                   {isZh ? "墨迹" : "Moji"}
                 </Link>
               </li>
               <li>
-                <Link className="transition hover:text-black dark:hover:text-white" href="#products">
+                <Link className="transition hover:text-black dark:hover:text-white" href="/products/zhiliao">
                   {isZh ? "知了卡片" : "Zhiliao Cards"}
                 </Link>
               </li>
@@ -48,6 +48,11 @@ export default async function Footer({ border = false }: { border?: boolean }) {
               <li>
                 <Link className="transition hover:text-black dark:hover:text-white" href="#about">
                   {isZh ? "关于我们" : "About"}
+                </Link>
+              </li>
+              <li>
+                <Link className="transition hover:text-black dark:hover:text-white" href="/news">
+                  {isZh ? "新闻" : "News"}
                 </Link>
               </li>
               <li>

@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { locale, t } = await getI18n();
   const isZh = locale === "zh";
   return {
-    title: `${t.auth.termsOfService} - LionSaid`,
+    title: `${t.legal.terms} - LionSaid`,
     description: isZh ? "LionSaid 平台服务条款" : "Terms of Service for LionSaid platform",
   };
 }

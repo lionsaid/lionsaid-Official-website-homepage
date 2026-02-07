@@ -1,227 +1,111 @@
 import type { Locale } from "./locales";
 
-export const messages: Record<
-  Locale,
-  {
-    header: {
-      login: string;
-      register: string;
-      console: string;
-      logout: string;
-      brand: string;
-      navProducts: string;
-      navEngineering: string;
-      navAbout: string;
-      appStore: string;
-    };
-    home: {
-      badge: string;
-      titleLine1: string;
-      titleLine2: string;
-      description: string;
-      ctaPrimary: string;
-      ctaSecondary: string;
-      mojiLabel: string;
-      mojiTitleLine1: string;
-      mojiTitleLine2: string;
-      mojiDescription: string;
-      mojiSwitchLabel: string;
-      mojiDay: string;
-      mojiNight: string;
-      mojiEditorLabel: string;
-      mojiEditorTitle: string;
-      mojiEditorSubtitle: string;
-      mojiEditorBody: string;
-      zhiliaoLabel: string;
-      zhiliaoTitleLine1: string;
-      zhiliaoTitleLine2: string;
-      zhiliaoDescription: string;
-      zhiliaoPoweredBy: string;
-      zhiliaoSwipeLabel: string;
-      zhiliaoMemoryLabel: string;
-      zhiliaoCardTitle: string;
-      zhiliaoCardHint: string;
-      zhiliaoRetention: string;
-      engineeringLabel: string;
-      engineeringTitle: string;
-      engineeringDescription: string;
-      engineeringReadMore: string;
-      blogPosts: Array<{ title: string; subtitle: string }>;
-      aboutLabel: string;
-      aboutTitleLine1: string;
-      aboutTitleLine2: string;
-      aboutDescription: string;
-      aboutAdvantageLabel: string;
-      aboutAdvantageItems: string[];
-    };
+type BlogPost = { slug: string; title: string; subtitle: string };
+
+type Messages = {
+  header: {
+    brand: string;
+    navProducts: string;
+    navEngineering: string;
+    navAbout: string;
+    appStore: string;
+  };
+  home: {
+    badge: string;
+    titleLine1: string;
+    titleLine2: string;
+    description: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    mojiLabel: string;
+    mojiTitleLine1: string;
+    mojiTitleLine2: string;
+    mojiDescription: string;
+    mojiSwitchLabel: string;
+    mojiDay: string;
+    mojiNight: string;
+    mojiEditorLabel: string;
+    mojiEditorTitle: string;
+    mojiEditorSubtitle: string;
+    mojiEditorBody: string;
+    zhiliaoLabel: string;
+    zhiliaoTitleLine1: string;
+    zhiliaoTitleLine2: string;
+    zhiliaoDescription: string;
+    zhiliaoPoweredBy: string;
+    zhiliaoSwipeLabel: string;
+    zhiliaoMemoryLabel: string;
+    zhiliaoCardTitle: string;
+    zhiliaoCardHint: string;
+    zhiliaoRetention: string;
+    engineeringLabel: string;
+    engineeringTitle: string;
+    engineeringDescription: string;
+    engineeringReadMore: string;
+    blogPosts: BlogPost[];
+    aboutLabel: string;
+    aboutTitleLine1: string;
+    aboutTitleLine2: string;
+    aboutDescription: string;
+    aboutAdvantageLabel: string;
+    aboutAdvantageItems: string[];
+  };
     pages: {
       about: {
         eyebrow: string;
         title: string;
         description: string;
+        craftsTitle: string;
+        craftsHeadline: string;
+        craftsBody: string;
+        craftsToolsLabel: string;
+        craftsTools: string[];
         studioTitle: string;
         studioBody: string;
         valuesTitle: string;
-        values: Array<{ title: string; description: string }>;
-        timelineTitle: string;
-        timeline: Array<{ year: string; title: string; description: string }>;
-      };
-      contact: {
-        eyebrow: string;
-        title: string;
-        description: string;
-        channelsTitle: string;
-        channels: Array<{ label: string; value: string; hint: string }>;
-        visitTitle: string;
-        visitBody: string;
-        formTitle: string;
-        formNote: string;
-      };
-      careers: {
-        eyebrow: string;
-        title: string;
-        description: string;
-        rolesTitle: string;
-        roles: Array<{ title: string; location: string; description: string }>;
-        cultureTitle: string;
-        culture: string[];
-        ctaTitle: string;
-        ctaBody: string;
-      };
+      values: Array<{ title: string; description: string }>;
+      timelineTitle: string;
+      timeline: Array<{ year: string; title: string; description: string }>;
     };
-    hero: {
-      badge: string;
-      titleLine1: string;
-      titleLine2: string;
-      description: string;
-      livePreviewLabel: string;
-      startFreeTrial: string;
-      learnMore: string;
-      statLabel: string;
-      statValue: string;
-      codeDomain: string;
-      codeLogin: string;
-      codeRegistry: string;
-      codeScope: string;
-      codeLoggedIn: string;
-      codePublish: string;
-      codePublished: string;
-      highlightTitle: string;
-      highlightDescription: string;
-    };
-    featuresPlanet: {
-      title: string;
-      subtitle: string;
-      items: Array<{
-        title: string;
-        description: string;
-      }>;
-    };
-    businessCategories: {
+    contact: {
       eyebrow: string;
       title: string;
       description: string;
-      metricLabel: string;
-      metricValue: string;
+      channelsTitle: string;
+      channels: Array<{ label: string; value: string; hint: string }>;
+      visitTitle: string;
+      visitBody: string;
+      formTitle: string;
+      formNote: string;
     };
-    cta: {
+    careers: {
+      eyebrow: string;
       title: string;
-      subtitle: string;
-      startFreeTrial: string;
+      description: string;
+      rolesTitle: string;
+      roles: Array<{ title: string; location: string; description: string }>;
+      cultureTitle: string;
+      culture: string[];
+      ctaTitle: string;
+      ctaBody: string;
     };
-    largeTestimonial: {
-      quotePrefix: string;
-      quoteEmphasis: string;
-      quoteSuffix: string;
-      person: string;
-      role: string;
-    };
-    footer: {
-      copyright: string;
-      product: string;
-      company: string;
-      resources: string;
-      social: string;
-      productLinks: {
-        features: string;
-        integrations: string;
-        pricing: string;
-        changelog: string;
-        method: string;
-        console: string;
-      };
-      companyLinks: {
-        about: string;
-        diversity: string;
-        blog: string;
-        careers: string;
-        financials: string;
-      };
-      resourceLinks: {
-        community: string;
-        terms: string;
-        vulnerability: string;
-      };
-    };
-    auth: {
-      signInTitle: string;
-      signUpTitle: string;
-      resetPasswordTitle: string;
-      email: string;
-      password: string;
-      fullName: string;
-      phone: string;
-      signInButton: string;
-      registerButton: string;
-      noAccount: string;
-      haveAccount: string;
-      signUpLink: string;
-      signInLink: string;
-      forgotPassword: string;
-      or: string;
-      continueWithGithub: string;
-      tosPrefix: string;
-      termsOfService: string;
-      tosMiddle: string;
-      privacyPolicy: string;
-      tosSuffix: string;
-      resetPasswordButton: string;
-    };
-    banner: {
-      download: string;
-      onGithub: string;
-      or: string;
-      checkPremium: string;
-      close: string;
-    };
-    ui: {
-      language: string;
-      theme: string;
-      themeLight: string;
-      themeDark: string;
-      themeSystem: string;
-    };
-    console: {
-      nav: {
-        overview: string;
-        users: string;
-        roles: string;
-        policies: string;
-        audit: string;
-        authorities: string;
-        menus: string;
-        organizations: string;
-        api: string;
-      };
-    };
-  }
-> = {
+  };
+  ui: {
+    language: string;
+    theme: string;
+    themeLight: string;
+    themeDark: string;
+    themeSystem: string;
+  };
+  legal: {
+    terms: string;
+    privacy: string;
+  };
+};
+
+export const messages: Record<Locale, Messages> = {
   en: {
     header: {
-      login: "Login",
-      register: "Register",
-      console: "Console",
-      logout: "Logout",
       brand: "Lionsaid (狮语)",
       navProducts: "Products",
       navEngineering: "Engineering",
@@ -266,14 +150,17 @@ export const messages: Record<
       engineeringReadMore: "Read more",
       blogPosts: [
         {
+          slug: "flutter-120hz",
           title: "Delivering 120Hz animation in Flutter",
           subtitle: "The key is timing across scheduling and composition.",
         },
         {
+          slug: "zhiliao-postgres",
           title: "PostgreSQL optimization behind Zhiliao Cards",
           subtitle: "Compressing memory curves into millisecond queries.",
         },
         {
+          slug: "local-first",
           title: "Local-First architecture: why we insist on locality",
           subtitle: "Offline-ready, without compromising trust.",
         },
@@ -296,6 +183,12 @@ export const messages: Record<
         title: "Designing tools that help people think.",
         description:
           "Lionsaid (狮语) is a product studio for digital craftsmen. We pair engineering rigor with design restraint to build tools for recording and internalizing knowledge.",
+        craftsTitle: "The Digital Craftsmen",
+        craftsHeadline: "Code is our brush, the screen is our canvas.",
+        craftsBody:
+          "We are Lionsaid, an independent studio of developers and designers. In an age of noise, we build quiet tools. From every Moji stroke to every Zhiliao recall, we craft software that stays warm and lasting. We don’t chase explosive DAU; we care about elegant code and precise pixels. Good software should feel like a trusted tool—better every day.",
+        craftsToolsLabel: "Toolbox",
+        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js", "Spring"],
         studioTitle: "Two products, one loop",
         studioBody:
           "Moji captures the fleeting. Zhiliao Cards turns recall into ownership. Together they form a closed loop that makes learning tangible.",
@@ -361,147 +254,6 @@ export const messages: Record<
         ctaBody: "Send a short intro and links to your work.",
       },
     },
-    hero: {
-      badge: "Now shipping · lionsaid.com",
-      titleLine1: "Design living brands with",
-      titleLine2: "Lionsaid (狮语)",
-      description:
-        "Lionsaid is the AI-native experience OS for teams who need to ideate, design, localize, and launch premium websites across regions in days instead of months.",
-      livePreviewLabel: "Live CLI preview",
-      startFreeTrial: "Get early access",
-      learnMore: "View platform demo",
-      statLabel: "Creative & growth teams scaling on Lionsaid",
-      statValue: "4,200+ creators",
-      codeDomain: "lionsaid.com",
-      codeLogin: "lionsaid login",
-      codeRegistry: "--registry=https://packages.lionsaid.com",
-      codeScope: "--scope=@lionsaid",
-      codeLoggedIn: "Connected to 狮语 Cloud.",
-      codePublish: "lionsaid deploy",
-      codePublished: "Experience shipped.",
-      highlightTitle: "Context-aware canvas",
-      highlightDescription:
-        "Brief, write, localize, and ship surfaces with AI copilots that understand your rituals, tone, and component system.",
-    },
-    featuresPlanet: {
-      title: "Why teams choose Lionsaid",
-      subtitle:
-        "Lionsaid blends premium visuals with AI orchestration so marketing, product, and engineering move together like a studio.",
-      items: [
-        {
-          title: "Adaptive Storylines",
-          description:
-            "Compose personalized sections for each buyer journey, then let our copilots adapt copy, CTAs, and visuals per region.",
-        },
-        {
-          title: "Localized Systems",
-          description:
-            "Translate once, localize forever. Sync product terms, currencies, and compliance gates across 30+ locales automatically.",
-        },
-        {
-          title: "SEO & Insights",
-          description:
-            "Preview Core Web Vitals, on-page semantics, and search demand as you build so every release is optimized before launch.",
-        },
-        {
-          title: "Code & Canvas",
-          description:
-            "Designers work on a tactile canvas while developers pull production-ready React blocks synced to your component library.",
-        },
-        {
-          title: "Signal Routing",
-          description:
-            "Route leads, trials, and intents into your CRM or CDP with a single rule engine that anyone on the team can understand.",
-        },
-        {
-          title: "Brand Memory",
-          description:
-            "Every page learns from previous launches, campaign notes, and performance, so improvements compound release after release.",
-        },
-      ],
-    },
-    businessCategories: {
-      eyebrow: "lionsaid.com/clients",
-      title: "Trusted by ambitious brands across Asia-Pacific",
-      description:
-        "From AI-native startups to listed enterprises, 狮语 (Lionsaid) helps teams narrate their story with cinematic polish.",
-      metricLabel: "Experience kits shipped this month",
-      metricValue: "268 launches",
-    },
-    cta: {
-      title: "Bring your lionsaid.com narrative to life",
-      subtitle:
-        "Ship a premium, localized, and measurable web experience with the 狮语 team standing beside your own.",
-      startFreeTrial: "Book a strategy session",
-    },
-    largeTestimonial: {
-      quotePrefix:
-        "“Lionsaid finally gives our product, brand, and regional teams",
-      quoteEmphasis: "one beautiful source of truth",
-      quoteSuffix:
-        " for every launch. Copy, layouts, data, and QA live together so we move twice as fast.”",
-      person: "Lena Wu",
-      role: "Head of Brand, Polaris Labs",
-    },
-    footer: {
-      copyright:
-        "© Lionsaid.com · 狮语. All rights reserved. Designed in Shanghai and Singapore.",
-      product: "Platform",
-      company: "Company",
-      resources: "Resources",
-      social: "Social",
-      productLinks: {
-        features: "Features",
-        integrations: "Connectors",
-        pricing: "Plans & billing",
-        changelog: "Release notes",
-        method: "BrandOS method",
-        console: "Admin console",
-      },
-      companyLinks: {
-        about: "About Lionsaid",
-        diversity: "Culture & values",
-        blog: "Journal",
-        careers: "Careers",
-        financials: "Press & financials",
-      },
-      resourceLinks: {
-        community: "Community",
-        terms: "Terms of service",
-        vulnerability: "Trust & security",
-      },
-    },
-    auth: {
-      signInTitle: "Sign in to Lionsaid",
-      signUpTitle: "Create your Lionsaid account",
-      resetPasswordTitle: "Reset your Lionsaid password",
-      email: "Email",
-      password: "Password",
-      fullName: "Full name",
-      phone: "Phone",
-      signInButton: "Sign in",
-      registerButton: "Create account",
-      noAccount: "Don't have an account?",
-      haveAccount: "Already have an account?",
-      signUpLink: "Create one",
-      signInLink: "Sign in",
-      forgotPassword: "Forgot password?",
-      or: "Or",
-      continueWithGithub: "Continue with GitHub",
-      tosPrefix: "By signing up, you agree to the ",
-      termsOfService: "Lionsaid Terms of Service",
-      tosMiddle: " and ",
-      privacyPolicy: "Privacy Policy",
-      tosSuffix: ".",
-      resetPasswordButton: "Send reset link",
-    },
-    banner: {
-      download: "Visit",
-      onGithub: " lionsaid.com",
-      or: "or",
-      checkPremium: "Book a walkthrough",
-      close: "Close",
-    },
     ui: {
       language: "Language",
       theme: "Theme",
@@ -509,26 +261,13 @@ export const messages: Record<
       themeDark: "Dark",
       themeSystem: "System",
     },
-    console: {
-      nav: {
-        overview: "Overview",
-        users: "Users",
-        roles: "Roles",
-        policies: "Policies",
-        audit: "Audit log",
-        authorities: "Authorities",
-        menus: "Menus",
-        organizations: "Organizations",
-        api: "API docs",
-      },
+    legal: {
+      terms: "Terms of Service",
+      privacy: "Privacy Policy",
     },
   },
   zh: {
     header: {
-      login: "登录",
-      register: "注册",
-      console: "控制台",
-      logout: "退出",
       brand: "Lionsaid 狮语",
       navProducts: "产品",
       navEngineering: "工程",
@@ -573,14 +312,17 @@ export const messages: Record<
       engineeringReadMore: "阅读全文",
       blogPosts: [
         {
+          slug: "flutter-120hz",
           title: "如何在 Flutter 中实现丝滑的 120Hz 动画",
           subtitle: "120Hz 的关键是调度与合成管线的配合。",
         },
         {
+          slug: "zhiliao-postgres",
           title: "知了卡片背后的 PostgreSQL 优化实践",
           subtitle: "把记忆曲线压缩成毫秒级的查询。",
         },
         {
+          slug: "local-first",
           title: "Local-First 架构：为什么我们坚持数据本地化",
           subtitle: "断网可用，不妥协用户信任。",
         },
@@ -603,6 +345,12 @@ export const messages: Record<
         title: "为思考打造的工具。",
         description:
           "Lionsaid（狮语）是一家数字工匠产品工作室。我们以工程严谨与克制设计并行，构建记录与内化的工具。",
+        craftsTitle: "工匠型团队 (The Digital Craftsmen)",
+        craftsHeadline: "代码是我们的画笔，屏幕是我们的画布。",
+        craftsBody:
+          "我们是 Lionsaid 狮语，一个由开发者和设计师组成的独立工作室。在信息爆炸的时代，我们拒绝制造噪音。我们相信工具应该是安静的、克制的。从“墨迹”的每一次落笔，到“知了卡片”的每一次记忆唤醒，我们致力于构建“长久且有温度”的软件。我们不追求日活的爆发式增长，更在意每一行代码的优雅与每一个像素的精准。好的软件应该像一把趁手的老工具，越用越顺手。",
+        craftsToolsLabel: "武器库",
+        craftsTools: ["Flutter", "PostgreSQL", "Figma", "Next.js", "Spring"],
         studioTitle: "两款产品，一个闭环",
         studioBody:
           "墨迹捕捉稍纵即逝的灵感，知了卡片把记忆变成能力。输入与输出形成闭环，让学习更可感。",
@@ -654,143 +402,6 @@ export const messages: Record<
         ctaBody: "发送简短介绍与作品链接。",
       },
     },
-    hero: {
-      badge: "上线啦 · lionsaid.com",
-      titleLine1: "用狮语（Lionsaid）",
-      titleLine2: "打造品牌体验 OS",
-      description:
-        "狮语（Lionsaid）是一款面向品牌与产品团队的 AI 体验操作系统，让网站策划、设计、文案、本地化与上线同步进行。",
-      livePreviewLabel: "CLI 实时预览",
-      startFreeTrial: "申请体验",
-      learnMore: "观看平台演示",
-      statLabel: "已在狮语协同的品牌与业务团队",
-      statValue: "4,200+ 名创作者",
-      codeDomain: "lionsaid.com",
-      codeLogin: "lionsaid login",
-      codeRegistry: "--registry=https://packages.lionsaid.com",
-      codeScope: "--scope=@lionsaid",
-      codeLoggedIn: "已连接狮语云。",
-      codePublish: "lionsaid deploy",
-      codePublished: "体验上线完成。",
-      highlightTitle: "语境驱动的协作画布",
-      highlightDescription:
-        "将简报、文案、组件、代码与洞察汇聚在同一画布，AI 会根据品牌语调自动给出协同建议。",
-    },
-    featuresPlanet: {
-      title: "团队为何选择狮语",
-      subtitle: "狮语将高级视觉语言与 AI 协作结合，让市场、产品、设计与工程像同一个工作室。",
-      items: [
-        {
-          title: "自适应故事线",
-          description:
-            "根据不同客户旅程生成专属区块，文案、色调与 CTA 会按区域与角色自动调整。",
-        },
-        {
-          title: "一键本地化系统",
-          description:
-            "配置一次，持续复用。术语、汇率、合规提示与排期会同步到 30+ 语言版本。",
-        },
-        {
-          title: "SEO 与洞察",
-          description:
-            "实时预览网页语义、Core Web Vitals 与搜索需求，在上线前完成优化。",
-        },
-        {
-          title: "代码与画布同频",
-          description:
-            "设计师在画布中创作，工程师直接获取与组件库同步的 React 模块，版本永不背离。",
-        },
-        {
-          title: "信号路由",
-          description:
-            "用统一的可视化规则，将线索、试用与意向流入 CRM 或 CDP，市场同学也能配置。",
-        },
-        {
-          title: "品牌记忆",
-          description:
-            "每次发布都会学习过往活动与数据洞察，让内容质量在持续复用中迭代升级。",
-        },
-      ],
-    },
-    businessCategories: {
-      eyebrow: "lionsaid.com/clients",
-      title: "服务泛亚太的高速与上市品牌",
-      description: "从 AI 新创到跨国集团，狮语帮助团队以电影级质感讲述品牌故事。",
-      metricLabel: "本月交付的体验套件",
-      metricValue: "268 场上线",
-    },
-    cta: {
-      title: "与狮语一起，打造 lionsaid.com 式体验",
-      subtitle: "我们提供策划、设计、文案、本地化与工程团队，与你的业务同频共创。",
-      startFreeTrial: "预约策略工作坊",
-    },
-    largeTestimonial: {
-      quotePrefix:
-        "“狮语让我们在一套系统内完成简报、创作与复盘，真正建立起",
-      quoteEmphasis: "跨团队共享的品牌记忆",
-      quoteSuffix: "，上线节奏翻倍提升。”",
-      person: "Lena Wu",
-      role: "Polaris Labs 品牌负责人",
-    },
-    footer: {
-      copyright:
-        "© Lionsaid.com · 狮语。保留所有权利，设计团队来自上海与新加坡。",
-      product: "平台",
-      company: "公司",
-      resources: "资源",
-      social: "社交",
-      productLinks: {
-        features: "核心能力",
-        integrations: "系统连接",
-        pricing: "套餐与计费",
-        changelog: "版本更新",
-        method: "BrandOS 方法论",
-        console: "管理后台",
-      },
-      companyLinks: {
-        about: "关于狮语",
-        diversity: "文化与价值观",
-        blog: "洞察专栏",
-        careers: "加入我们",
-        financials: "新闻与财务",
-      },
-      resourceLinks: {
-        community: "社区",
-        terms: "服务条款",
-        vulnerability: "信任与安全",
-      },
-    },
-    auth: {
-      signInTitle: "登录狮语账号",
-      signUpTitle: "注册狮语账号",
-      resetPasswordTitle: "重置狮语密码",
-      email: "邮箱",
-      password: "密码",
-      fullName: "姓名",
-      phone: "电话",
-      signInButton: "登录",
-      registerButton: "创建账号",
-      noAccount: "还没有账号？",
-      haveAccount: "已有账号？",
-      signUpLink: "去注册",
-      signInLink: "去登录",
-      forgotPassword: "忘记密码？",
-      or: "或",
-      continueWithGithub: "使用 GitHub 登录",
-      tosPrefix: "注册即表示你同意 ",
-      termsOfService: "狮语服务条款",
-      tosMiddle: " 和 ",
-      privacyPolicy: "隐私政策",
-      tosSuffix: "。",
-      resetPasswordButton: "发送重置链接",
-    },
-    banner: {
-      download: "访问",
-      onGithub: " lionsaid.com",
-      or: "或",
-      checkPremium: "预约演示",
-      close: "关闭",
-    },
     ui: {
       language: "语言",
       theme: "主题",
@@ -798,18 +409,9 @@ export const messages: Record<
       themeDark: "深色",
       themeSystem: "跟随系统",
     },
-    console: {
-      nav: {
-        overview: "概览",
-        users: "用户管理",
-        roles: "角色管理",
-        policies: "权限策略",
-        audit: "审计日志",
-        authorities: "权限管理",
-        menus: "菜单管理",
-        organizations: "组织管理",
-        api: "API 文档",
-      },
+    legal: {
+      terms: "服务条款",
+      privacy: "隐私政策",
     },
   },
 };
