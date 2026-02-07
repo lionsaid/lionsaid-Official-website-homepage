@@ -315,7 +315,18 @@ export default function HomeShowcase({
                 data-reveal
                 style={{ transitionDelay: `${index * 120}ms` }}
               >
-                <GlareCard className=\"bg-white/90 dark:bg-white/5\">\n                  <p className=\"text-xs uppercase tracking-[0.3em] text-black/40 dark:text-white/40\">Engineering</p>\n                  <h3 className=\"mt-4 text-xl font-semibold text-black dark:text-white\">{post.title}</h3>\n                  <p className=\"mt-3 text-sm text-black/60 dark:text-white/60\">{post.subtitle}</p>\n                  <div className=\"mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400\">\n                    {copy.engineeringReadMore} <span>→</span>\n                  </div>\n                </GlareCard>\n              </div>\n            ))}
+                <GlareCard className="bg-white/90 dark:bg-white/5">
+                  <p className="text-xs uppercase tracking-[0.3em] text-black/40 dark:text-white/40">
+                    Engineering
+                  </p>
+                  <h3 className="mt-4 text-xl font-semibold text-black dark:text-white">{post.title}</h3>
+                  <p className="mt-3 text-sm text-black/60 dark:text-white/60">{post.subtitle}</p>
+                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                    {copy.engineeringReadMore} <span>→</span>
+                  </div>
+                </GlareCard>
+              </div>
+            ))}
           </div>
         </div>
       </section>

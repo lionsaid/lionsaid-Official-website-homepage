@@ -66,12 +66,6 @@ export default async function Header() {
             {isAuthed ? (
               <>
                 <Link
-                  href="/console/dashboard"
-                  className="hidden rounded-full border border-black/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black transition hover:bg-black/5 dark:border-white/10 dark:text-white dark:hover:bg-white/10 md:inline-flex"
-                >
-                  {t.header.console}
-                </Link>
-                <Link
                   href="/signout"
                   className="hidden rounded-full bg-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 dark:bg-white dark:text-black md:inline-flex"
                 >
