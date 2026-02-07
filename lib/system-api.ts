@@ -1,5 +1,3 @@
-import { getSessionToken } from "./auth/session";
-
 const DEFAULT_BASE_URL =
   process.env.SYSTEM_API_BASE_URL ??
   process.env.NEXT_PUBLIC_SYSTEM_API_BASE_URL ??
@@ -8,11 +6,6 @@ const SYSTEM_API_PATH_PREFIX =
   process.env.SYSTEM_API_PATH_PREFIX ??
   process.env.NEXT_PUBLIC_SYSTEM_API_PATH_PREFIX ??
   "";
-const AUTH_LOGIN_PATH = process.env.SYSTEM_AUTH_LOGIN_PATH ?? "/api/auth/sessions";
-const AUTH_REGISTER_PATH =
-  process.env.SYSTEM_AUTH_REGISTER_PATH ?? "/api/auth/users";
-const AUTH_SESSION_CURRENT_PATH =
-  process.env.SYSTEM_AUTH_SESSION_CURRENT_PATH ?? "/api/auth/sessions/current";
 
 const ACCEPT_JSON_HEADER = { Accept: "application/json" };
 const JSON_CONTENT_TYPE_HEADER = { "Content-Type": "application/json" };
@@ -27,7 +20,6 @@ type RequestOptions = {
   body?: unknown;
   headers?: Record<string, string>;
   searchParams?: SearchParams;
-  auth?: boolean;
 };
 
 export type GrantedAuthority = {
@@ -142,13 +134,6 @@ export type SecurityEvent = {
   sourceIp?: string;
   description?: string;
   createdTime?: string;
-};
-
-export type AuthResult = {
-  token?: string;
-  refreshToken?: string;
-  expiresIn?: number;
-  raw?: any;
 };
 
 export async function listUsers(params: { page?: number; size?: number } = {}) {
@@ -596,88 +581,6 @@ export async function uploadPublicFile(params: { file: Blob; filename?: string; 
   });
 }
 
-export async function refreshToken(payload: Record<string, string>) {
-  const response = await systemRequest<any>("/api/tokens/refresh", {
-    method: "POST",
-    body: payload,
-  });
-  return normalizeAuthResult(response) ?? { raw: response };
-}
-
-export async function introspectToken() {
-  return systemRequest<any>("/api/tokens/introspections", {
-    method: "POST",
-  });
-}
-
-export async function revokeTokens() {
-  return systemRequest<any>("/api/tokens/revocations", {
-    method: "POST",
-  });
-}
-
-export async function signInWithPassword(credentials: {
-  username: string;
-  password: string;
-  code?: string;
-}) {
-  const payload = await systemRequest<any>(AUTH_LOGIN_PATH, {
-    method: "POST",
-    body: credentials,
-    auth: false,
-  });
-  return normalizeAuthResult(payload);
-}
-
-export async function deleteCurrentSession() {
-  return systemRequest(AUTH_SESSION_CURRENT_PATH, { method: "DELETE" });
-}
-
-export async function requestVerificationCode(payload: {
-  username: string;
-  password?: string;
-  code?: string;
-}) {
-  return systemRequest<any>("/api/auth/verification-codes", {
-    method: "POST",
-    body: payload,
-    auth: false,
-  });
-}
-
-export async function verifyVerificationCode(payload: {
-  username: string;
-  password?: string;
-  code: string;
-}) {
-  return systemRequest<any>("/api/auth/verification-codes/verify", {
-    method: "POST",
-    body: payload,
-    auth: false,
-  });
-}
-
-export async function registerAccount(payload: {
-  fullName: string;
-  email: string;
-  phone?: string;
-  password: string;
-}) {
-  const body = {
-    username: payload.email,
-    nickName: payload.fullName,
-    email: payload.email,
-    mobile: payload.phone,
-    password: payload.password,
-  };
-  const response = await systemRequest<any>(AUTH_REGISTER_PATH, {
-    method: "POST",
-    body,
-    auth: false,
-  });
-  return normalizeAuthResult(response) ?? { raw: response };
-}
-
 async function systemRequest<T>(path: string, options: RequestOptions = {}): Promise<T | null> {
   try {
     const url = resolveSystemUrl(path);
@@ -689,13 +592,6 @@ async function systemRequest<T>(path: string, options: RequestOptions = {}): Pro
       ...(isFormData ? {} : JSON_CONTENT_TYPE_HEADER),
       ...options.headers,
     };
-    if (options.auth !== false) {
-      const token = await getSessionToken();
-      if (token) {
-        headers.Authorization = `Bearer ${token}`;
-      }
-    }
-
     const init: RequestInit = {
       method: options.method ?? "GET",
       headers,
@@ -714,7 +610,7 @@ async function systemRequest<T>(path: string, options: RequestOptions = {}): Pro
       console.log("[systemRequest]", {
         method: init.method,
         url: url.toString(),
-        auth: options.auth !== false && Boolean(headers.Authorization),
+        auth: false,
       });
     }
 
@@ -791,43 +687,6 @@ function extractItems<T>(data: any): T[] {
   if (Array.isArray(data.content)) return data.content as T[];
   if (Array.isArray(data.list)) return data.list as T[];
   return [];
-}
-
-function normalizeAuthResult(payload: any): AuthResult | null {
-  if (!payload) return null;
-  if (typeof payload === "string") {
-    return { token: payload, raw: payload };
-  }
-  if (typeof payload !== "object") {
-    return { raw: payload };
-  }
-
-  if (payload.token || payload.accessToken || payload.jwt) {
-    return {
-      token: payload.token ?? payload.accessToken ?? payload.jwt,
-      refreshToken: payload.refreshToken ?? payload.refresh_token,
-      expiresIn: payload.expiresIn ?? payload.expires_in,
-      raw: payload,
-    };
-  }
-
-  if (payload.data) {
-    return normalizeAuthResult(payload.data);
-  }
-
-  if (payload.content) {
-    return normalizeAuthResult(payload.content);
-  }
-
-  if (payload.result) {
-    return normalizeAuthResult(payload.result);
-  }
-
-  if (payload.value) {
-    return normalizeAuthResult(payload.value);
-  }
-
-  return { raw: payload };
 }
 
 function toPrefixedParams(prefix: string, payload?: SearchParams) {
