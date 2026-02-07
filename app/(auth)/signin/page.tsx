@@ -3,66 +3,67 @@ export const metadata = {
   description: "Page description",
 };
 
-import Link from "next/link";
+import { redirect } from "next/navigation";
+import SignInForm from "./signin-form";
+import { signInWithPassword } from "@/lib/system-api";
+import { setSessionToken } from "@/lib/auth/session";
+import { getI18n } from "@/lib/i18n/server";
 
-export default function SignIn() {
+type FormState = {
+  error?: string;
+};
+
+export default async function SignIn() {
+  const { t } = await getI18n();
+  const copy = {
+    title: t.auth.signInTitle,
+    emailLabel: t.auth.email,
+    passwordLabel: t.auth.password,
+    buttonLabel: t.auth.signInButton,
+    noAccount: t.auth.noAccount,
+    signUpLink: t.auth.signUpLink,
+    signUpHref: "/signup",
+    emailPlaceholder: "lionsaid@team.com",
+    passwordPlaceholder: "••••••••",
+    forgotPassword: t.auth.forgotPassword,
+    forgotHref: "/reset-password",
+  };
+
   return (
     <>
-      <>
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold">Sign in to your account</h1>
-        </div>
-        {/* Form */}
-        <form>
-          <div className="space-y-4">
-            <div>
-              <label
-                className="mb-1 block text-sm font-medium text-gray-700"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                className="form-input w-full py-2"
-                type="email"
-                placeholder="corybarker@email.com"
-                required
-              />
-            </div>
-            <div>
-              <label
-                className="mb-1 block text-sm font-medium text-gray-700"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                className="form-input w-full py-2"
-                type="password"
-                autoComplete="on"
-                placeholder="••••••••"
-                required
-              />
-            </div>
-          </div>
-          <div className="mt-6">
-            <button className="btn w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%]">
-              Sign In
-            </button>
-          </div>
-        </form>
-        {/* Bottom link */}
-        <div className="mt-6 text-center">
-          <Link
-            className="text-sm text-gray-700 underline hover:no-underline"
-            href="/reset-password"
-          >
-            Forgot password
-          </Link>
-        </div>
-      </>
+      <div className="mb-10">
+        <h1 className="text-4xl font-bold">{copy.title}</h1>
+      </div>
+      <SignInForm action={handleSignIn} copy={copy} />
     </>
   );
+}
+
+async function handleSignIn(
+  _prevState: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  "use server";
+  const { locale } = await getI18n();
+  const email = String(formData.get("email") ?? "").trim();
+  const password = String(formData.get("password") ?? "");
+
+  if (!email || !password) {
+    return {
+      error: locale === "zh" ? "请输入邮箱和密码。" : "Email and password are required.",
+    };
+  }
+
+  const authResult = await signInWithPassword({ username: email, password });
+  if (!authResult?.token) {
+    return {
+      error:
+        locale === "zh"
+          ? "登录失败，请检查账号或稍后再试。"
+          : "Sign-in failed. Please verify your credentials and try again.",
+    };
+  }
+
+  await setSessionToken(authResult.token, authResult.expiresIn);
+  redirect("/console/dashboard");
 }

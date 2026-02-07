@@ -6,144 +6,148 @@ import Avatar03 from "@/public/images/avatar-03.jpg";
 import Avatar04 from "@/public/images/avatar-04.jpg";
 import Avatar05 from "@/public/images/avatar-05.jpg";
 import Avatar06 from "@/public/images/avatar-06.jpg";
+import { getI18n } from "@/lib/i18n/server";
 
-export default function HeroHome() {
+const AVATARS = [Avatar01, Avatar02, Avatar03, Avatar04, Avatar05, Avatar06];
+
+export default async function HeroHome() {
+  const { t } = await getI18n();
+
   return (
-    <section className="relative">
+    <section className="relative overflow-hidden">
       <PageIllustration />
+      <div
+        className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,_rgba(96,165,250,0.25),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.22),transparent_65%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 -z-10 opacity-50 [background-image:radial-gradient(circle_at_center,rgba(148,163,184,0.3)_1px,transparent_1px)] [background-size:32px_32px]"
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Hero content */}
-        <div className="pb-12 pt-32 md:pb-20 md:pt-40">
-          {/* Section header */}
-          <div className="pb-12 text-center md:pb-16">
+        <div className="pb-16 pt-32 md:pb-24 md:pt-40">
+          <div className="relative isolate overflow-hidden rounded-[40px] border border-white/10 bg-white/80 px-6 py-16 text-center shadow-[0_35px_120px_rgba(56,189,248,0.25)] backdrop-blur-md dark:border-white/5 dark:bg-gray-900/60 md:px-16">
             <div
-              className="mb-6 border-y [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1]"
-              data-aos="zoom-y-out"
-            >
-              <div className="-mx-0.5 flex justify-center -space-x-3">
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar01}
-                  width={32}
-                  height={32}
-                  alt="Avatar 01"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar02}
-                  width={32}
-                  height={32}
-                  alt="Avatar 01"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar03}
-                  width={32}
-                  height={32}
-                  alt="Avatar 02"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar04}
-                  width={32}
-                  height={32}
-                  alt="Avatar 03"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar05}
-                  width={32}
-                  height={32}
-                  alt="Avatar 04"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar06}
-                  width={32}
-                  height={32}
-                  alt="Avatar 05"
-                />
-              </div>
+              className="pointer-events-none absolute inset-6 -z-10 rounded-[32px] border border-white/10"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute inset-x-10 top-8 -z-10 h-72 rounded-[32px] bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.35),transparent_70%)] blur-3xl"
+              aria-hidden="true"
+            />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-white/90 px-4 py-1 text-sm font-medium text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white">
+              <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+              {t.hero.badge}
             </div>
-            <h1
-              className="mb-6 border-y text-5xl font-bold [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] md:text-6xl"
-              data-aos="zoom-y-out"
-              data-aos-delay={150}
-            >
-              The website builder you're <br className="max-lg:hidden" />
-              looking for
+            <h1 className="mt-6 text-4xl font-bold text-slate-900 dark:text-white md:text-6xl">
+              {t.hero.titleLine1} <br className="max-lg:hidden" />
+              {t.hero.titleLine2}
             </h1>
-            <div className="mx-auto max-w-3xl">
-              <p
-                className="mb-8 text-lg text-gray-700"
-                data-aos="zoom-y-out"
-                data-aos-delay={300}
+            <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600 dark:text-slate-200">
+              {t.hero.description}
+            </p>
+            <div className="mx-auto mt-8 flex flex-col gap-4 text-base sm:flex-row sm:justify-center">
+              <a
+                className="btn group inline-flex items-center justify-center rounded-full border border-transparent bg-gradient-to-r from-sky-500 to-indigo-500 px-7 py-3 text-white shadow-xl shadow-sky-500/30 transition duration-300 hover:scale-[1.01] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400"
+                href="#0"
               >
-                Simple is a modern website builder powered by AI that changes
-                how companies create user interfaces together.
-              </p>
-              <div className="relative before:absolute before:inset-0 before:border-y before:[border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1]">
-                <div
-                  className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
-                  data-aos="zoom-y-out"
-                  data-aos-delay={450}
-                >
-                  <a
-                    className="btn group mb-4 w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
-                    href="#0"
-                  >
-                    <span className="relative inline-flex items-center">
-                      Start Free Trial{" "}
-                      <span className="ml-1 tracking-normal text-blue-300 transition-transform group-hover:translate-x-0.5">
-                        -&gt;
-                      </span>
-                    </span>
-                  </a>
-                  <a
-                    className="btn w-full bg-white text-gray-800 shadow-sm hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="#0"
-                  >
-                    Learn More
-                  </a>
-                </div>
-              </div>
+                <span className="relative inline-flex items-center">
+                  {t.hero.startFreeTrial}
+                  <span className="ml-2 text-sky-200 transition group-hover:translate-x-1">
+                    -&gt;
+                  </span>
+                </span>
+              </a>
+              <a
+                className="btn inline-flex items-center justify-center rounded-full border border-slate-200/60 bg-white/70 px-7 py-3 text-slate-900 transition hover:border-slate-300 hover:bg-white dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                href="#0"
+              >
+                {t.hero.learnMore}
+              </a>
             </div>
-          </div>
-          {/* Hero image */}
-          <div
-            className="mx-auto max-w-3xl"
-            data-aos="zoom-y-out"
-            data-aos-delay={600}
-          >
-            <div className="relative aspect-video rounded-2xl bg-gray-900 px-5 py-3 shadow-xl before:pointer-events-none before:absolute before:-inset-5 before:border-y before:[border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] after:absolute after:-inset-5 after:-z-10 after:border-x after:[border-image:linear-gradient(to_bottom,transparent,--theme(--color-slate-300/.8),transparent)1]">
-              <div className="relative mb-8 flex items-center justify-between before:block before:h-[9px] before:w-[41px] before:bg-[length:16px_9px] before:[background-image:radial-gradient(circle_at_4.5px_4.5px,var(--color-gray-600)_4.5px,transparent_0)] after:w-[41px]">
-                <span className="text-[13px] font-medium text-white">
-                  cruip.com
-                </span>
+
+            <div className="mt-12 grid gap-6 text-left lg:grid-cols-[1.1fr,0.9fr]">
+              <div className="relative overflow-hidden rounded-[28px] border border-white/20 bg-gradient-to-br from-slate-900 via-gray-900 to-gray-900/80 p-6 text-sm text-slate-300 shadow-2xl dark:border-white/5">
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-slate-400">
+                  <span>{t.hero.codeDomain}</span>
+                  <span className="rounded-full border border-white/10 px-3 py-1 font-semibold text-emerald-300/90">
+                    {t.hero.livePreviewLabel}
+                  </span>
+                </div>
+                <div className="mt-6 font-mono text-base text-slate-500 [&_span]:opacity-0">
+                  <span className="animate-[code-1_10s_infinite] text-emerald-300">
+                    {t.hero.codeLogin}
+                  </span>{" "}
+                  <span className="animate-[code-2_10s_infinite] text-slate-400">
+                    {t.hero.codeRegistry}
+                  </span>
+                  <br />
+                  <span className="animate-[code-3_10s_infinite] text-slate-400">
+                    {t.hero.codeScope}
+                  </span>{" "}
+                  <span className="animate-[code-4_10s_infinite] text-slate-200">
+                    {t.hero.codeLoggedIn}
+                  </span>
+                  <br />
+                  <br />
+                  <span className="animate-[code-5_10s_infinite] text-indigo-300">
+                    {t.hero.codePublish}
+                  </span>
+                  <br />
+                  <span className="animate-[code-6_10s_infinite] text-slate-100">
+                    {t.hero.codePublished}
+                  </span>
+                </div>
+                <div className="pointer-events-none absolute -right-16 -top-10 h-48 w-48 rounded-full bg-sky-500/30 blur-3xl" />
               </div>
-              <div className="font-mono text-gray-500 [&_span]:opacity-0">
-                <span className="animate-[code-1_10s_infinite] text-gray-200">
-                  npm login
-                </span>{" "}
-                <span className="animate-[code-2_10s_infinite]">
-                  --registry=https://npm.pkg.github.com
-                </span>
-                <br />
-                <span className="animate-[code-3_10s_infinite]">
-                  --scope=@phanatic
-                </span>{" "}
-                <span className="animate-[code-4_10s_infinite]">
-                  Successfully logged-in.
-                </span>
-                <br />
-                <br />
-                <span className="animate-[code-5_10s_infinite] text-gray-200">
-                  npm publish
-                </span>
-                <br />
-                <span className="animate-[code-6_10s_infinite]">
-                  Package published.
-                </span>
+              <div className="grid gap-6">
+                <div className="rounded-[28px] border border-slate-200/70 bg-white px-6 py-5 shadow-xl shadow-slate-200/60 dark:border-white/10 dark:bg-white/5">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-300">
+                        {t.hero.statLabel}
+                      </p>
+                      <p className="mt-2 text-3xl font-semibold text-slate-900 dark:text-white">
+                        {t.hero.statValue}
+                      </p>
+                    </div>
+                    <div className="flex -space-x-3">
+                      {AVATARS.map((avatar, index) => (
+                        <Image
+                          key={index}
+                          className="box-content rounded-full border-2 border-white bg-white dark:border-gray-900 dark:bg-gray-900"
+                          src={avatar}
+                          width={48}
+                          height={48}
+                          alt={`Avatar ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
+                    {t.hero.highlightDescription}
+                  </p>
+                </div>
+                <div className="relative overflow-hidden rounded-[28px] border border-slate-200/50 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 px-6 py-5 shadow-2xl dark:border-white/10">
+                  <div
+                    className="absolute inset-0 opacity-40 [mask-image:radial-gradient(circle_at_top,_black,transparent_70%)] [background-image:linear-gradient(120deg,rgba(59,130,246,0.8),rgba(236,72,153,0.4))]"
+                    aria-hidden="true"
+                  />
+                  <div className="relative">
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">
+                      {t.hero.highlightTitle}
+                    </p>
+                    <p className="mt-3 text-base text-slate-100">
+                      {t.hero.highlightDescription}
+                    </p>
+                    <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-sky-100">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-white/10 text-lg text-white">
+                        ✦
+                      </span>
+                      {t.hero.startFreeTrial}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

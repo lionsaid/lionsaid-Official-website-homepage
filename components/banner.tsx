@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { getClientI18n } from "@/lib/i18n/client";
 
 export default function Banner() {
   const [bannerOpen, setBannerOpen] = useState<boolean>(true);
+  const { t } = getClientI18n();
 
   return (
     <>
@@ -13,27 +15,26 @@ export default function Banner() {
             <div className="inline-flex text-slate-500">
               <a
                 className="font-medium text-slate-50 hover:underline"
-                href="https://github.com/cruip/tailwind-landing-page-template"
+                href="https://lionsaid.com"
                 target="_blank"
                 rel="noreferrer"
               >
-                Download<span className="hidden sm:inline"> on GitHub</span>
+                {t.banner.download}
+                <span className="hidden sm:inline">{t.banner.onGithub}</span>
               </a>{" "}
-              <span className="px-1.5 italic">or</span>{" "}
+              <span className="px-1.5 italic">{t.banner.or}</span>{" "}
               <a
                 className="font-medium text-emerald-400 hover:underline"
-                href="https://cruip.com/simple/"
-                target="_blank"
-                rel="noreferrer"
+                href="mailto:hello@lionsaid.com"
               >
-                Check Premium Version
+                {t.banner.checkPremium}
               </a>
             </div>
             <button
               className="ml-3 border-l border-gray-700 pl-2 text-slate-500 hover:text-slate-400"
               onClick={() => setBannerOpen(false)}
             >
-              <span className="sr-only">Close</span>
+              <span className="sr-only">{t.banner.close}</span>
               <svg
                 className="h-4 w-4 shrink-0 fill-current"
                 viewBox="0 0 16 16"
